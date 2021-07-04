@@ -45,8 +45,8 @@ function App() {
 				</button>
 			</form>
 			<div className="todo-container">
-				{todos.map((item) => (
-					<ToDo todo={item} removeTodo={removeTodo} />
+				{todos.map((item, i) => (
+					<ToDo key={i} todo={item} removeTodo={removeTodo} />
 				))}
 			</div>
 			<p className="counter">
