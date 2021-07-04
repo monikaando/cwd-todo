@@ -1,3 +1,12 @@
+.todoapp {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+input {
+	margin: 20px 0;
+	width: 15vw;
+}
 .todo {
 	background-color: #264653;
 	color: white;
@@ -7,6 +16,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	width: 30vw;
 }
 .todo:hover {
 	background-color: #2a9d8f;

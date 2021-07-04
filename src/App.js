@@ -12,7 +12,7 @@ function App() {
 		setTodos(todos.filter((td) => td !== todo));
 	}
 	return (
-		<div>
+		<div className="todoapp">
 			<h1>To-do List</h1>
 			<div>
 				<input
