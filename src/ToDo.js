@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ToDo({ todo, removeTodo }) {
+export default function Todo({ todo, removeTodo }) {
 	return (
 		<div className="todo">
 			<p>{todo}</p>
