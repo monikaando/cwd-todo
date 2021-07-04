@@ -10,12 +10,27 @@ function getTodosFromLocalStorage() {
 		return [];
 	}
 }
+
 function App() {
 	const [todos, setTodos] = useState(getTodosFromLocalStorage);
 	const [inputValue, setInputValue] = useState('');
+	function addTodo(e) {
+		if (inputValue && inputValue.trim() && inputValue.length > 0) {
+			setTodos([...todos, inputValue]);
+			//clean up the input value
+			setInputValue('');
+		}
+	}
+	function handleKeypress(e) {
+		//it triggers by pressing the enter key
+		if (e.keyCode === 13) {
+			addTodo();
+		}
+	}
 	function removeTodo(todo) {
 		setTodos(todos.filter((td) => td !== todo));
 	}
+
 	useEffect(() => {
 		localStorage.setItem('todos', todos);
 	}, [todos]);
@@ -26,21 +41,12 @@ function App() {
 				<input
 					className="add-todo-input"
 					value={inputValue}
+					onKeyDown={handleKeypress}
 					onChange={(event) => {
 						setInputValue(event.target.value);
 					}}
 				></input>
-				<button
-					className="submit-button"
-					onClick={(e) => {
-						//add to do
-						if (inputValue && inputValue.trim() && inputValue.length > 0) {
-							setTodos([...todos, inputValue]);
-							//clean up the input value
-							setInputValue('');
-						}
-					}}
-				>
+				<button className="submit-button" onClick={addTodo}>
 					Add Todo
 				</button>
 			</div>
