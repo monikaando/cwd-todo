@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Todo({ todo, removeTodo }) {
 	return (
-		<div className="todo">
+		<div key="{todo}" className="todo">
 			<p>{todo}</p>
 			<button
 				className="remove"

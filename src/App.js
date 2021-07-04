@@ -15,16 +15,11 @@ function App() {
 	const [todos, setTodos] = useState(getTodosFromLocalStorage);
 	const [inputValue, setInputValue] = useState('');
 	function addTodo(e) {
+		e.preventDefault();
 		if (inputValue && inputValue.trim() && inputValue.length > 0) {
 			setTodos([...todos, inputValue]);
 			//clean up the input value
 			setInputValue('');
-		}
-	}
-	function handleKeypress(e) {
-		//it triggers by pressing the enter key
-		if (e.keyCode === 13) {
-			addTodo();
 		}
 	}
 	function removeTodo(todo) {
@@ -37,11 +32,10 @@ function App() {
 	return (
 		<div id="app">
 			<h1 className="todos-title">To-do List</h1>
-			<div className="input-row">
+			<form className="input-row">
 				<input
 					className="add-todo-input"
 					value={inputValue}
-					onKeyDown={handleKeypress}
 					onChange={(event) => {
 						setInputValue(event.target.value);
 					}}
@@ -49,7 +43,7 @@ function App() {
 				<button className="submit-button" onClick={addTodo}>
 					Add Todo
 				</button>
-			</div>
+			</form>
 			<div className="todo-container">
 				{todos.map((item) => (
 					<ToDo todo={item} removeTodo={removeTodo} />
