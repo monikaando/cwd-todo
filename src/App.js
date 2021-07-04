@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ToDo from './ToDo';
+
+//initial value
+const initialState = ['Buy some milk', 'Feed cats', 'Vacum floors', 'Take a shower'];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [todos, setTodos] = useState(initialState);
+	const [inputValue, setInputValue] = useState('');
+	function removeTodo(todo) {
+		setTodos(todos.filter((td) => td !== todo));
+	}
+	return (
+		<div>
+			<h1>To-do List</h1>
+			<div>
+				<input
+					value={inputValue}
+					onChange={(event) => {
+						setInputValue(event.target.value);
+					}}
+				></input>
+				<button
+					onClick={(e) => {
+						//add to do
+						if (inputValue && inputValue.trim()) {
+							setTodos([...todos, inputValue]);
+							//clean up the input value
+							setInputValue('');
+						}
+					}}
+				>
+					Add Todo
+				</button>
+			</div>
+			{todos.map((item) => (
+				<ToDo todo={item} removeTodo={removeTodo} />
+			))}
+		</div>
+	);
 }
 
 export default App;
